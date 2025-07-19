@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import AuthForm from "./components/AuthForm";
+import PasswordManager from "./components/PasswordManager";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showAuth, setShowAuth] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div>
+      <div style={styles.navbar}>
+        <button onClick={() => setShowAuth(!showAuth)} style={styles.navButton}>
+          {showAuth ? "🔙 Back to App" : "🔐 Login / Signup"}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      {showAuth ? <AuthForm /> : <PasswordManager />}
+    </div>
+  );
 }
 
-export default App
+const styles = {
+  navbar: {
+    backgroundColor: "#ffffffff",
+    padding: "10px 20px",
+    textAlign: "right",
+  },
+  navButton: {
+    padding: "8px 16px",
+    backgroundColor: "#27707bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontSize: "14px",
+  },
+};
+
+export default App;
